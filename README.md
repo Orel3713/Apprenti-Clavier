@@ -27,6 +27,16 @@ L’application est conçue pour fonctionner avec VoiceOver et propose notamment
 - une interface utilisable sans lecteur d’écran ;
 - une apparence automatique, claire ou sombre.
 
+### Prérequis pour l’utilisation avec VoiceOver
+
+Pour utiliser Apprenti Clavier avec VoiceOver, il est nécessaire de connaître les commandes de navigation de base de VoiceOver :
+
+- VO + Flèche gauche et VO + Flèche droite pour parcourir les éléments ;
+- VO + Espace pour activer l’élément sélectionné ;
+- les commandes d’interaction de VoiceOver pour entrer dans les zones de défilement, les parcourir et en sortir.
+
+Apprenti Clavier s’appuie sur la navigation standard de VoiceOver. Ces connaissances de base sont donc nécessaires pour parcourir correctement l’interface de l’application.
+
 ## Profils et progression
 
 Apprenti Clavier permet de créer plusieurs profils.
@@ -53,7 +63,9 @@ Un Guide utilisateur accompagne Apprenti Clavier et présente en détail l’ins
 
 ## Projet d’origine
 
-Apprenti Clavier pour macOS est une adaptation inspirée du projet libre ApprentiClavier.
+Apprenti Clavier pour macOS est une nouvelle implémentation inspirée du projet libre ApprentiClavier.
+
+Le projet d’origine a servi de source d’inspiration pour le principe général de l’apprentissage progressif du clavier. La version macOS a été développée comme une nouvelle application en Swift et SwiftUI, avec une interface, une architecture et des fonctionnalités conçues spécifiquement pour macOS et VoiceOver.
 
 ## À propos de ce projet
 
