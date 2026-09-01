@@ -1,4 +1,4 @@
-![Icône d’Apprenti Clavier, deux mains au-dessus d’un clavier avec un œil vert.](ApprentiClavier-AppIcon-1024.png)
+![Logo d’Apprenti Clavier, deux mains au-dessus d’un clavier avec un œil vert.](ApprentiClavier-AppIcon-1024.png)
 
 # Apprenti Clavier
 
