@@ -61,6 +61,16 @@ Lorsqu’une version est disponible, téléchargez le fichier DMG correspondant,
 
 Un Guide utilisateur accompagne Apprenti Clavier et présente en détail l’installation, les profils, les modules, les exercices, les réglages, les statistiques, les raccourcis utiles et les solutions aux problèmes les plus courants.
 
+## Application dérivée : Apprenti Clavier le Parc d’attractions
+
+Une application dérivée et complémentaire, intitulée « Apprenti Clavier le Parc d’attractions », permet de poursuivre l’entraînement à la frappe au clavier dans un univers ludique et entièrement accessible avec VoiceOver.
+
+Elle propose six jeux de dactylographie comportant chacun dix niveaux progressifs. Pour entrer dans le Parc, l’utilisateur importe un profil ayant terminé les quatorze modules pédagogiques d’Apprenti Clavier.
+
+Le dépôt d’Apprenti Clavier le Parc d’attractions est disponible à l’adresse suivante :
+
+https://github.com/Orel3713/Apprenti-Clavier-Le-Parc-d-attractions
+
 ## Projet d’origine
 
 Apprenti Clavier pour macOS est une nouvelle implémentation inspirée du projet libre ApprentiClavier.
