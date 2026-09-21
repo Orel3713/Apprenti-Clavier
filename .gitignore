@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+
+# Xcode - données locales utilisateur
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad/
+
+# Xcode - produits de compilation
+DerivedData/
+build/
+*.ipa
+*.dSYM
+*.dSYM.zip
+
+# Swift Package Manager
+.build/
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+
+# Archives et paquets de distribution
+*.xcarchive
+
+# Clés privées / certificats à ne jamais versionner
+*.p8
+*.pem
+*.key
+*.cer
+*.p12
+*.mobileprovision
