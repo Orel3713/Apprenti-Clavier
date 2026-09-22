@@ -196,12 +196,12 @@ struct AccueilView: View {
                     .font(.largeTitle)
                     .bold()
                     .accessibilityAddTraits(.isHeader)
-                    .accessibilityRotorEntry(id: ElementAccessible.titreApplication, in: espaceEntetesAccueil)
+                    .acAccessibilityRotorEntry(id: ElementAccessible.titreApplication, in: espaceEntetesAccueil)
 
                 Text("Accueil")
                     .font(.largeTitle.bold())
                     .accessibilityAddTraits(.isHeader)
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: ElementAccessible.titreAccueil,
                         in: espaceEntetesAccueil
                     )
@@ -228,7 +228,7 @@ struct AccueilView: View {
                 }
                 .accessibilityElement(children: .combine)
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: ElementAccessible.titreApprenants,
                     in: espaceEntetesAccueil
                 )
@@ -242,7 +242,7 @@ struct AccueilView: View {
                         .font(.title2)
                         .bold()
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(id: ElementAccessible.titreProfils, in: espaceEntetesAccueil)
+                        .acAccessibilityRotorEntry(id: ElementAccessible.titreProfils, in: espaceEntetesAccueil)
                         .accessibilityFocused(
                             $focusVoiceOver,
                             equals: .titreProfils
@@ -280,7 +280,7 @@ struct AccueilView: View {
                     .font(.title2)
                     .bold()
                     .accessibilityAddTraits(.isHeader)
-                    .accessibilityRotorEntry(id: ElementAccessible.titreCreationApprenant, in: espaceEntetesAccueil)
+                    .acAccessibilityRotorEntry(id: ElementAccessible.titreCreationApprenant, in: espaceEntetesAccueil)
                 }
 
                 Text("Nom de l’apprenant :")
@@ -328,7 +328,7 @@ struct AccueilView: View {
                 }
                 .accessibilityElement(children: .combine)
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: ElementAccessible.titreFormateurs,
                     in: espaceEntetesAccueil
                 )
@@ -342,7 +342,7 @@ struct AccueilView: View {
                         .font(.title2)
                         .bold()
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(id: ElementAccessible.titreChoixFormateur, in: espaceEntetesAccueil)
+                        .acAccessibilityRotorEntry(id: ElementAccessible.titreChoixFormateur, in: espaceEntetesAccueil)
 
                     ForEach(formateurs.formateurs, id: \.self) { formateur in
                         Button("Continuer avec \(formateur)") {
@@ -370,7 +370,7 @@ struct AccueilView: View {
                         .font(.title2)
                         .bold()
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(id: ElementAccessible.titreCreationFormateur, in: espaceEntetesAccueil)
+                        .acAccessibilityRotorEntry(id: ElementAccessible.titreCreationFormateur, in: espaceEntetesAccueil)
                 }
 
                 Text("Nom du formateur :")
@@ -414,7 +414,11 @@ struct AccueilView: View {
                 alignment: .topLeading
             )
         }
-        .accessibilityRotor("En-têtes Apprenti Clavier") {
+        .acAccessibilityRotor("En-têtes Apprenti Clavier", montereyEntries: {
+            acMontereyRotorItems(entetesAccueil, id: \.id) { entete in
+                ACMontereyRotorEntry(entete.titre, id: entete.id, in: espaceEntetesAccueil)
+            }
+        }) {
             ForEach(entetesAccueil, id: \.id) { entete in
                 AccessibilityRotorEntry(Text(entete.titre), id: entete.id, in: espaceEntetesAccueil)
             }

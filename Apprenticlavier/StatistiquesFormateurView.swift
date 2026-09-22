@@ -46,13 +46,13 @@ struct StatistiquesFormateurView: View {
                     .font(.largeTitle.bold())
                     .accessibilityAddTraits(.isHeader)
                     .accessibilityFocused($elementEnFocus, equals: .titre)
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: "statistiques-formateur-titre",
                         in: espaceEntetes
                     )
 
                 Button(titreBoutonExportation) { exporterStatistiques() }
-                    .accessibilityRotorEntry(id: "stats-formateur-exporter", in: espaceBoutons)
+                    .acAccessibilityRotorEntry(id: "stats-formateur-exporter", in: espaceBoutons)
 
                 Picker("Choisir un apprenant", selection: $apprenantSelectionne) {
                     Text("Aucun apprenant sélectionné").tag(nil as String?)
@@ -81,7 +81,7 @@ struct StatistiquesFormateurView: View {
                     }
                     .keyboardShortcut("w", modifiers: .command)
                     .accessibilityLabel("Fermer")
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: "stats-formateur-fermer",
                         in: espaceBoutons
                     )
@@ -92,7 +92,14 @@ struct StatistiquesFormateurView: View {
             .frame(maxWidth: 900, alignment: .leading)
         }
         .frame(minWidth: 780, minHeight: 640)
-        .accessibilityRotor("Boutons Apprenti Clavier") {
+        .acAccessibilityRotor("Boutons Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(titreBoutonExportation, id: "stats-formateur-exporter", in: espaceBoutons)
+            ACMontereyRotorEntry(
+                "Fermer",
+                id: "stats-formateur-fermer",
+                in: espaceBoutons
+            )
+        }) {
             AccessibilityRotorEntry(Text(titreBoutonExportation), id: "stats-formateur-exporter", in: espaceBoutons)
             AccessibilityRotorEntry(
                 "Fermer",
@@ -100,7 +107,11 @@ struct StatistiquesFormateurView: View {
                 in: espaceBoutons
             )
         }
-        .accessibilityRotor("En-têtes Apprenti Clavier") {
+        .acAccessibilityRotor("En-têtes Apprenti Clavier", montereyEntries: {
+            acMontereyRotorItems(entetesStatistiques, id: \.id) { entete in
+                ACMontereyRotorEntry(entete.titre, id: entete.id, in: espaceEntetes)
+            }
+        }) {
             ForEach(entetesStatistiques, id: \.id) { entete in
                 AccessibilityRotorEntry(Text(entete.titre), id: entete.id, in: espaceEntetes)
             }
@@ -191,7 +202,7 @@ struct StatistiquesFormateurView: View {
                 .font(.title2.bold())
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityFocused($elementEnFocus, equals: .informationsGenerales)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "statistiques-formateur-general",
                     in: espaceEntetes
                 )
@@ -206,7 +217,7 @@ struct StatistiquesFormateurView: View {
                     Text(apprenant)
                         .font(.headline)
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: "general-apprenant-\(apprenant)",
                             in: espaceEntetes
                         )
@@ -229,7 +240,7 @@ struct StatistiquesFormateurView: View {
                 .font(.title2.bold())
                 .accessibilityAddTraits(.isHeader)
                 .accessibilityFocused($elementEnFocus, equals: .apprenant(apprenant))
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "details-apprenant-\(apprenant)",
                     in: espaceEntetes
                 )
@@ -245,7 +256,7 @@ struct StatistiquesFormateurView: View {
             Text("Difficultés repérées")
                 .font(.title2.bold())
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "details-difficultes-\(apprenant)",
                     in: espaceEntetes
                 )
@@ -260,7 +271,7 @@ struct StatistiquesFormateurView: View {
                     Text(titreCategorie(type))
                         .font(.title3.bold())
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: idCategorie(type, apprenant: apprenant),
                             in: espaceEntetes
                         )
@@ -269,7 +280,7 @@ struct StatistiquesFormateurView: View {
                         Text(source.titre)
                             .font(.headline)
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityRotorEntry(
+                            .acAccessibilityRotorEntry(
                                 id: idSource(source, type: type, apprenant: apprenant),
                                 in: espaceEntetes
                             )
@@ -279,7 +290,7 @@ struct StatistiquesFormateurView: View {
                                 Text(lecon.titre)
                                     .font(.headline)
                                     .accessibilityAddTraits(.isHeader)
-                                    .accessibilityRotorEntry(
+                                    .acAccessibilityRotorEntry(
                                         id: idLecon(lecon, source: source, type: type, apprenant: apprenant),
                                         in: espaceEntetes
                                     )
@@ -310,7 +321,7 @@ struct StatistiquesFormateurView: View {
             Text("Résultats des leçons personnalisées")
                 .font(.title2.bold())
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "details-personnalisees-\(apprenant)",
                     in: espaceEntetes
                 )
@@ -326,7 +337,7 @@ struct StatistiquesFormateurView: View {
                         Text(premiere.leconTitre)
                             .font(.headline)
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityRotorEntry(id: "resultat-personnalise|\(apprenant)|\(cle)", in: espaceEntetes)
+                            .acAccessibilityRotorEntry(id: "resultat-personnalise|\(apprenant)|\(cle)", in: espaceEntetes)
                         Text("Formateur : \(premiere.formateur ?? "Formateur")")
                         if let objectif = premiere.objectifPedagogique {
                             Text(objectif.descriptionPourApprenant)
@@ -440,7 +451,7 @@ struct StatistiquesFormateurView: View {
                 Text("Exercice \(erreur.statistique.exerciceNumero)")
                     .font(.subheadline.bold())
                     .accessibilityAddTraits(.isHeader)
-                    .accessibilityRotorEntry(id: "exercice|\(apprenant)|\(erreur.id)", in: espaceEntetes)
+                    .acAccessibilityRotorEntry(id: "exercice|\(apprenant)|\(erreur.id)", in: espaceEntetes)
                 Text("Texte attendu : « \(detail.texteAttendu) »")
                     .accessibilityLabel(
                         "Texte attendu. "

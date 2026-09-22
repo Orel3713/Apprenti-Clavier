@@ -43,7 +43,7 @@ struct StatistiquesView: View {
                     .accessibilityFocused(
                         $titreEnFocus
                     )
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: "statistiques-titre",
                         in: espaceEntetes
                     )
@@ -52,7 +52,7 @@ struct StatistiquesView: View {
                     exporterStatistiques()
                 }
                 .accessibilityLabel("Exporter mes statistiques")
-                .accessibilityRotorEntry(id: "stats-exporter", in: espaceBoutons)
+                .acAccessibilityRotorEntry(id: "stats-exporter", in: espaceBoutons)
 
                 if let utilisateur =
                     progression.utilisateurActif {
@@ -91,7 +91,7 @@ struct StatistiquesView: View {
                     }
                     .keyboardShortcut("w", modifiers: .command)
                     .accessibilityLabel("Fermer")
-                    .accessibilityRotorEntry(id: "stats-fermer", in: espaceBoutons)
+                    .acAccessibilityRotorEntry(id: "stats-fermer", in: espaceBoutons)
                 }
             }
             .padding(32)
@@ -114,7 +114,18 @@ struct StatistiquesView: View {
             NSApplication.shared.keyWindow?
                 .performClose(nil)
         }
-        .accessibilityRotor("Boutons Apprenti Clavier") {
+        .acAccessibilityRotor("Boutons Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(
+                "Exporter mes statistiques",
+                id: "stats-exporter",
+                in: espaceBoutons
+            )
+            ACMontereyRotorEntry(
+                "Fermer",
+                id: "stats-fermer",
+                in: espaceBoutons
+            )
+        }) {
             AccessibilityRotorEntry(
                 "Exporter mes statistiques",
                 id: "stats-exporter",
@@ -132,7 +143,35 @@ struct StatistiquesView: View {
                 object: nil
             )
         }
-        .accessibilityRotor("En-têtes Apprenti Clavier") {
+        .acAccessibilityRotor("En-têtes Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(
+                "Mes statistiques",
+                id: "statistiques-titre",
+                in: espaceEntetes
+            )
+            ACMontereyRotorEntry(
+                "Progression générale",
+                id: "statistiques-progression",
+                in: espaceEntetes
+            )
+            ACMontereyRotorEntry(
+                "Vitesse de frappe",
+                id: "statistiques-vitesse",
+                in: espaceEntetes
+            )
+            ACMontereyRotorEntry(
+                "Progression par module",
+                id: "statistiques-modules",
+                in: espaceEntetes
+            )
+            acMontereyRotorItems(ModuleDefinition.tousLesModules) { module in
+                ACMontereyRotorEntry(
+                    module.titre,
+                    id: "statistiques-module-\(module.id)",
+                    in: espaceEntetes
+                )
+            }
+        }) {
             AccessibilityRotorEntry(
                 "Mes statistiques",
                 id: "statistiques-titre",
@@ -172,7 +211,7 @@ struct StatistiquesView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "statistiques-progression",
                     in: espaceEntetes
                 )
@@ -220,7 +259,7 @@ struct StatistiquesView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "statistiques-vitesse",
                     in: espaceEntetes
                 )
@@ -281,7 +320,7 @@ struct StatistiquesView: View {
                 .font(.title2)
                 .fontWeight(.semibold)
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "statistiques-modules",
                     in: espaceEntetes
                 )
@@ -316,7 +355,7 @@ struct StatistiquesView: View {
             Text(module.titre)
                 .font(.headline)
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: "statistiques-module-\(module.id)",
                     in: espaceEntetes
                 )

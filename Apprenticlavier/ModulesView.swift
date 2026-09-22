@@ -63,7 +63,20 @@ struct ModulesView: View {
                 listeDesModules
             }
         }
-        .accessibilityRotor("En-têtes Apprenti Clavier") {
+        .acAccessibilityRotor("En-têtes Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(
+                "Modules",
+                id: EnteteModules.titreModules,
+                in: espaceEntetes
+            )
+            acMontereyRotorItems(ModuleDefinition.tousLesModules) { module in
+                ACMontereyRotorEntry(
+                    module.titre,
+                    id: EnteteModules.module(module.id),
+                    in: espaceEntetes
+                )
+            }
+        }) {
             AccessibilityRotorEntry(
                 "Modules",
                 id: EnteteModules.titreModules,
@@ -140,7 +153,7 @@ struct ModulesView: View {
                     $cibleFocus,
                     equals: .titreModules
                 )
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: EnteteModules.titreModules,
                     in: espaceEntetes
                 )
@@ -204,7 +217,7 @@ struct ModulesView: View {
                     )
                 )
                 .accessibilityAddTraits(.isHeader)
-                .accessibilityRotorEntry(
+                .acAccessibilityRotorEntry(
                     id: EnteteModules.module(module.id),
                     in: espaceEntetes
                 )

@@ -75,7 +75,7 @@ struct ParametresView: View {
                     .font(.largeTitle)
                     .bold()
                     .accessibilityAddTraits(.isHeader)
-                    .accessibilityRotorEntry(id: EnteteReglages.titre, in: espaceEntetesReglages)
+                    .acAccessibilityRotorEntry(id: EnteteReglages.titre, in: espaceEntetesReglages)
                     .accessibilityFocused(
                         $focusVoiceOver,
                         equals: .titre
@@ -194,7 +194,7 @@ struct ParametresView: View {
                 } label: {
                     Text("Apparence")
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(id: EnteteReglages.apparence, in: espaceEntetesReglages)
+                        .acAccessibilityRotorEntry(id: EnteteReglages.apparence, in: espaceEntetesReglages)
                 }
 
                 GroupBox {
@@ -330,7 +330,7 @@ struct ParametresView: View {
                 } label: {
                     Text("Accessibilité VoiceOver")
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(id: EnteteReglages.accessibilite, in: espaceEntetesReglages)
+                        .acAccessibilityRotorEntry(id: EnteteReglages.accessibilite, in: espaceEntetesReglages)
                 }
 
                 GroupBox {
@@ -356,7 +356,7 @@ struct ParametresView: View {
                 } label: {
                     Text("Sons de validation des exercices")
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(id: EnteteReglages.sonsValidationExercices, in: espaceEntetesReglages)
+                        .acAccessibilityRotorEntry(id: EnteteReglages.sonsValidationExercices, in: espaceEntetesReglages)
                 }
 
                 if let formateur = formateurs.formateurActif {
@@ -384,7 +384,7 @@ struct ParametresView: View {
                     } label: {
                         Text("Modification du code PIN")
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityRotorEntry(id: EnteteReglages.modificationCodePIN, in: espaceEntetesReglages)
+                            .acAccessibilityRotorEntry(id: EnteteReglages.modificationCodePIN, in: espaceEntetesReglages)
                     }
                 }
 
@@ -419,7 +419,7 @@ struct ParametresView: View {
                     } label: {
                         Text("Progression")
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityRotorEntry(id: EnteteReglages.progression, in: espaceEntetesReglages)
+                            .acAccessibilityRotorEntry(id: EnteteReglages.progression, in: espaceEntetesReglages)
                     }
 
                 }
@@ -444,7 +444,7 @@ struct ParametresView: View {
                 } label: {
                     Text(titreSectionSuppression)
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(id: EnteteReglages.suppression, in: espaceEntetesReglages)
+                        .acAccessibilityRotorEntry(id: EnteteReglages.suppression, in: espaceEntetesReglages)
                 }
 
                 if !messageConfirmation.isEmpty {
@@ -493,7 +493,19 @@ struct ParametresView: View {
         } message: {
             Text(messageAlerte)
         }
-        .accessibilityRotor("En-têtes Réglages") {
+        .acAccessibilityRotor("En-têtes Réglages", montereyEntries: {
+            ACMontereyRotorEntry("Réglages", id: EnteteReglages.titre, in: espaceEntetesReglages)
+            ACMontereyRotorEntry("Apparence", id: EnteteReglages.apparence, in: espaceEntetesReglages)
+            ACMontereyRotorEntry("Accessibilité VoiceOver", id: EnteteReglages.accessibilite, in: espaceEntetesReglages)
+            ACMontereyRotorEntry("Sons de validation des exercices", id: EnteteReglages.sonsValidationExercices, in: espaceEntetesReglages)
+            if formateurs.formateurActif != nil {
+                ACMontereyRotorEntry("Modification du code PIN", id: EnteteReglages.modificationCodePIN, in: espaceEntetesReglages)
+            }
+            if formateurs.formateurActif == nil {
+                ACMontereyRotorEntry("Progression", id: EnteteReglages.progression, in: espaceEntetesReglages)
+            }
+            ACMontereyRotorEntry(titreSectionSuppression, id: EnteteReglages.suppression, in: espaceEntetesReglages)
+        }) {
             AccessibilityRotorEntry("Réglages", id: EnteteReglages.titre, in: espaceEntetesReglages)
             AccessibilityRotorEntry("Apparence", id: EnteteReglages.apparence, in: espaceEntetesReglages)
             AccessibilityRotorEntry("Accessibilité VoiceOver", id: EnteteReglages.accessibilite, in: espaceEntetesReglages)

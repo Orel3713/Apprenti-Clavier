@@ -341,14 +341,14 @@ struct EditeurLeconView: View {
                         .font(.largeTitle.bold())
                         .accessibilityAddTraits(.isHeader)
                         .accessibilityFocused($elementEnFocus, equals: .titre)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteEditeur.titre,
                             in: espaceEntetes
                         )
 
                     Text("Informations générales")
                         .font(.title2.bold()).accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteEditeur.informations,
                             in: espaceEntetes
                         )
@@ -370,7 +370,7 @@ struct EditeurLeconView: View {
                     Text("Objectif pédagogique")
                         .font(.title2.bold())
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteEditeur.objectif,
                             in: espaceEntetes
                         )
@@ -389,7 +389,7 @@ struct EditeurLeconView: View {
                     Text("Fiches pédagogiques")
                         .font(.title2.bold()).accessibilityAddTraits(.isHeader)
                         .accessibilityFocused($elementEnFocus, equals: .fiches)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteEditeur.fiches,
                             in: espaceEntetes
                         )
@@ -425,7 +425,7 @@ struct EditeurLeconView: View {
                                 Text("Fiche \(index + 1)")
                                     .font(.headline).accessibilityAddTraits(.isHeader)
                                     .accessibilityFocused($elementEnFocus, equals: .fiche(fiche.id))
-                                    .accessibilityRotorEntry(
+                                    .acAccessibilityRotorEntry(
                                         id: EnteteEditeur.fiche(fiche.id),
                                         in: espaceEntetes
                                     )
@@ -448,14 +448,14 @@ struct EditeurLeconView: View {
                         HStack {
                             Button("Ajouter une fiche pédagogique") { ajouterFiche() }
                                 .disabled(brouillon.fiches.count >= 20)
-                                .accessibilityRotorEntry(
+                                .acAccessibilityRotorEntry(
                                     id: BoutonEditeur.ajouterFiche,
                                     in: espaceBoutons
                                 )
                             Button("Supprimer des fiches pédagogiques…") {
                                 suppressionDemandee = ContexteSuppressionElements(type: .fiches)
                             }
-                            .accessibilityRotorEntry(
+                            .acAccessibilityRotorEntry(
                                 id: BoutonEditeur.supprimerFiches,
                                 in: espaceBoutons
                             )
@@ -466,7 +466,7 @@ struct EditeurLeconView: View {
                     Text("Exercices")
                         .font(.title2.bold()).accessibilityAddTraits(.isHeader)
                         .accessibilityFocused($elementEnFocus, equals: .exercices)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteEditeur.exercices,
                             in: espaceEntetes
                         )
@@ -484,7 +484,7 @@ struct EditeurLeconView: View {
                             Text("Exercice \(index + 1)")
                                 .font(.headline).accessibilityAddTraits(.isHeader)
                                 .accessibilityFocused($elementEnFocus, equals: .exercice(exercice.id))
-                                .accessibilityRotorEntry(
+                                .acAccessibilityRotorEntry(
                                     id: EnteteEditeur.exercice(exercice.id),
                                     in: espaceEntetes
                                 )
@@ -505,14 +505,14 @@ struct EditeurLeconView: View {
                     HStack {
                         Button("Ajouter un exercice") { ajouterExercice() }
                             .disabled(brouillon.exercices.count >= 20)
-                            .accessibilityRotorEntry(
+                            .acAccessibilityRotorEntry(
                                 id: BoutonEditeur.ajouterExercice,
                                 in: espaceBoutons
                             )
                         Button("Supprimer des exercices…") {
                             suppressionDemandee = ContexteSuppressionElements(type: .exercices)
                         }
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: BoutonEditeur.supprimerExercices,
                             in: espaceBoutons
                         )
@@ -521,7 +521,7 @@ struct EditeurLeconView: View {
                     Divider()
                     Text("Résumé de la leçon")
                         .font(.title2.bold()).accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteEditeur.resume,
                             in: espaceEntetes
                         )
@@ -565,7 +565,7 @@ struct EditeurLeconView: View {
                     Text("Bénéficiaires de cette leçon")
                         .font(.title2.bold())
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteEditeur.beneficiaires,
                             in: espaceEntetes
                         )
@@ -584,7 +584,7 @@ struct EditeurLeconView: View {
                     Divider()
                     HStack(spacing: 12) {
                         Button("Annuler") { retour() }
-                            .accessibilityRotorEntry(
+                            .acAccessibilityRotorEntry(
                                 id: BoutonEditeur.annuler,
                                 in: espaceBoutons
                             )
@@ -592,7 +592,7 @@ struct EditeurLeconView: View {
                         Button("Enregistrer la leçon") { enregistrer() }
                             .keyboardShortcut(.defaultAction)
                             .disabled(!enregistrementDisponible)
-                            .accessibilityRotorEntry(
+                            .acAccessibilityRotorEntry(
                                 id: BoutonEditeur.enregistrer,
                                 in: espaceBoutons
                             )
@@ -622,7 +622,63 @@ struct EditeurLeconView: View {
                 secondaryButton: .cancel()
             )
         }
-        .accessibilityRotor("En-têtes Apprenti Clavier") {
+        .acAccessibilityRotor("En-têtes Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(
+                lecon == nil ? "Créer une leçon personnalisée" : "Modifier la leçon",
+                id: EnteteEditeur.titre,
+                in: espaceEntetes
+            )
+            ACMontereyRotorEntry(
+                "Informations générales",
+                id: EnteteEditeur.informations,
+                in: espaceEntetes
+            )
+            ACMontereyRotorEntry(
+                "Objectif pédagogique",
+                id: EnteteEditeur.objectif,
+                in: espaceEntetes
+            )
+            ACMontereyRotorEntry(
+                "Fiches pédagogiques",
+                id: EnteteEditeur.fiches,
+                in: espaceEntetes
+            )
+            acMontereyRotorItems(
+                Array((ajouterFiches ? brouillon.fiches : []).enumerated()),
+                id: \.element.id
+            ) { index, fiche in
+                ACMontereyRotorEntry(
+                    "Fiche \(index + 1)",
+                    id: EnteteEditeur.fiche(fiche.id),
+                    in: espaceEntetes
+                )
+            }
+            ACMontereyRotorEntry(
+                "Exercices",
+                id: EnteteEditeur.exercices,
+                in: espaceEntetes
+            )
+            acMontereyRotorItems(
+                Array(brouillon.exercices.enumerated()),
+                id: \.element.id
+            ) { index, exercice in
+                ACMontereyRotorEntry(
+                    "Exercice \(index + 1)",
+                    id: EnteteEditeur.exercice(exercice.id),
+                    in: espaceEntetes
+                )
+            }
+            ACMontereyRotorEntry(
+                "Résumé de la leçon",
+                id: EnteteEditeur.resume,
+                in: espaceEntetes
+            )
+            ACMontereyRotorEntry(
+                "Bénéficiaires de cette leçon",
+                id: EnteteEditeur.beneficiaires,
+                in: espaceEntetes
+            )
+        }) {
             AccessibilityRotorEntry(
                 Text(lecon == nil ? "Créer une leçon personnalisée" : "Modifier la leçon"),
                 id: EnteteEditeur.titre,
@@ -679,7 +735,40 @@ struct EditeurLeconView: View {
                 in: espaceEntetes
             )
         }
-        .accessibilityRotor("Boutons Apprenti Clavier") {
+        .acAccessibilityRotor("Boutons Apprenti Clavier", montereyEntries: {
+            if ajouterFiches {
+                ACMontereyRotorEntry(
+                    "Ajouter une fiche pédagogique",
+                    id: BoutonEditeur.ajouterFiche,
+                    in: espaceBoutons
+                )
+                ACMontereyRotorEntry(
+                    "Supprimer des fiches pédagogiques",
+                    id: BoutonEditeur.supprimerFiches,
+                    in: espaceBoutons
+                )
+            }
+            ACMontereyRotorEntry(
+                "Ajouter un exercice",
+                id: BoutonEditeur.ajouterExercice,
+                in: espaceBoutons
+            )
+            ACMontereyRotorEntry(
+                "Supprimer des exercices",
+                id: BoutonEditeur.supprimerExercices,
+                in: espaceBoutons
+            )
+            ACMontereyRotorEntry(
+                "Annuler",
+                id: BoutonEditeur.annuler,
+                in: espaceBoutons
+            )
+            ACMontereyRotorEntry(
+                "Enregistrer la leçon",
+                id: BoutonEditeur.enregistrer,
+                in: espaceBoutons
+            )
+        }) {
             if ajouterFiches {
                 AccessibilityRotorEntry(
                     "Ajouter une fiche pédagogique",
@@ -1024,23 +1113,23 @@ private struct FicheGestionLeconView: View {
             VStack(alignment: .leading, spacing: 12) {
                 Button("Prévisualiser la leçon") { previsualiser() }
                     .keyboardShortcut(.defaultAction)
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: BoutonGestion.previsualiser,
                         in: espaceBoutons
                     )
                 Button("Modifier la leçon") { modifier() }
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: BoutonGestion.modifier,
                         in: espaceBoutons
                     )
                 Button("Supprimer la leçon") { confirmerSuppression = true }
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: BoutonGestion.supprimer,
                         in: espaceBoutons
                     )
                 Button("Retour à mes leçons") { fermer() }
                     .keyboardShortcut(.cancelAction)
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: BoutonGestion.retour,
                         in: espaceBoutons
                     )
@@ -1052,7 +1141,28 @@ private struct FicheGestionLeconView: View {
         .frame(minWidth: 720, minHeight: 560, alignment: .topLeading)
         .onAppear { placerFocusTitre() }
         .onExitCommand { fermer() }
-        .accessibilityRotor("Boutons Apprenti Clavier") {
+        .acAccessibilityRotor("Boutons Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(
+                "Prévisualiser la leçon",
+                id: BoutonGestion.previsualiser,
+                in: espaceBoutons
+            )
+            ACMontereyRotorEntry(
+                "Modifier la leçon",
+                id: BoutonGestion.modifier,
+                in: espaceBoutons
+            )
+            ACMontereyRotorEntry(
+                "Supprimer la leçon",
+                id: BoutonGestion.supprimer,
+                in: espaceBoutons
+            )
+            ACMontereyRotorEntry(
+                "Retour à mes leçons",
+                id: BoutonGestion.retour,
+                in: espaceBoutons
+            )
+        }) {
             AccessibilityRotorEntry(
                 "Prévisualiser la leçon",
                 id: BoutonGestion.previsualiser,
@@ -1194,7 +1304,7 @@ struct GestionLeconsView: View {
                 Text("Mes leçons personnalisées")
                     .font(.largeTitle.bold())
                     .accessibilityAddTraits(.isHeader)
-                    .accessibilityRotorEntry(
+                    .acAccessibilityRotorEntry(
                         id: EnteteListe.titre,
                         in: espaceEntetes
                     )
@@ -1208,7 +1318,7 @@ struct GestionLeconsView: View {
                     Text(groupe.libelleAccessible)
                         .font(.title2.bold())
                         .accessibilityAddTraits(.isHeader)
-                        .accessibilityRotorEntry(
+                        .acAccessibilityRotorEntry(
                             id: EnteteListe.groupe(groupe.id),
                             in: espaceEntetes
                         )
@@ -1236,7 +1346,20 @@ struct GestionLeconsView: View {
         }
         .padding(40)
         .frame(minWidth: 720, minHeight: 560, alignment: .topLeading)
-        .accessibilityRotor("En-têtes Apprenti Clavier") {
+        .acAccessibilityRotor("En-têtes Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(
+                "Mes leçons personnalisées",
+                id: EnteteListe.titre,
+                in: espaceEntetes
+            )
+            acMontereyRotorItems(groupesLecons) { groupe in
+                ACMontereyRotorEntry(
+                    groupe.libelleAccessible,
+                    id: EnteteListe.groupe(groupe.id),
+                    in: espaceEntetes
+                )
+            }
+        }) {
             AccessibilityRotorEntry(
                 "Mes leçons personnalisées",
                 id: EnteteListe.titre,
@@ -1416,7 +1539,7 @@ struct LeconsPersonnaliseesApprenantView: View {
                         Text("Leçons personnalisées")
                             .font(.largeTitle.bold())
                             .accessibilityAddTraits(.isHeader)
-                            .accessibilityRotorEntry(
+                            .acAccessibilityRotorEntry(
                                 id: EnteteLeconsApprenant.titre,
                                 in: espaceEntetes
                             )
@@ -1435,7 +1558,7 @@ struct LeconsPersonnaliseesApprenantView: View {
                                 )
                                 .font(.title2.bold())
                                 .accessibilityAddTraits(.isHeader)
-                                .accessibilityRotorEntry(
+                                .acAccessibilityRotorEntry(
                                     id: EnteteLeconsApprenant.formateur(groupe.nomFormateur),
                                     in: espaceEntetes
                                 )
@@ -1483,7 +1606,24 @@ struct LeconsPersonnaliseesApprenantView: View {
                 .frame(minWidth: 700, minHeight: 560, alignment: .topLeading)
             }
         }
-        .accessibilityRotor("En-têtes Apprenti Clavier") {
+        .acAccessibilityRotor("En-têtes Apprenti Clavier", montereyEntries: {
+            ACMontereyRotorEntry(
+                "Leçons personnalisées",
+                id: EnteteLeconsApprenant.titre,
+                in: espaceEntetes
+            )
+            acMontereyRotorItems(groupesFiltres) { groupe in
+                ACMontereyRotorEntry(
+                    
+                        groupe.lecons.count == 1
+                            ? "\(groupe.nomFormateur) — 1 leçon"
+                            : "\(groupe.nomFormateur) — \(groupe.lecons.count) leçons"
+                    ,
+                    id: EnteteLeconsApprenant.formateur(groupe.nomFormateur),
+                    in: espaceEntetes
+                )
+            }
+        }) {
             AccessibilityRotorEntry(
                 "Leçons personnalisées",
                 id: EnteteLeconsApprenant.titre,
