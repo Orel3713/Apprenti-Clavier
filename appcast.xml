@@ -4,11 +4,11 @@
         <title>Apprenti Clavier</title>
         <item>
             <title>2.0</title>
-            <pubDate>Mon, 21 Sep 2026 15:46:07 +0200</pubDate>
+            <pubDate>Tue, 22 Sep 2026 14:36:05 +0200</pubDate>
             <sparkle:version>4</sparkle:version>
             <sparkle:shortVersionString>2.0</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>12.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/Orel3713/Apprenti-Clavier/releases/download/v2.0/Apprenti.Clavier.2.0.dmg" length="5513728" type="application/octet-stream" sparkle:edSignature="RSu/1oT1USQO/oyLsPKilh6NfNNn5Gy3ffAlrnvm06nnba8BLUE/oBjtRLTBlEXHQqBqwspSiKlle4VbXtsaCA=="/>
+            <enclosure url="https://raw.githubusercontent.com/Orel3713/Apprenti-Clavier/main/Apprenti.Clavier.2.0.dmg" length="5594112" type="application/octet-stream" sparkle:edSignature="e4Z1lC83k32KUPRUGLfH7EeYihZfDlXIJz7yiyQ6P5bu2nr0kkzEMKbBFdaojuvlyWz0Rgw/la7mm2/KGBeaAg=="/>
         </item>
     </channel>
 </rss>
